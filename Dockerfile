@@ -20,7 +20,6 @@ RUN curl -O -k -L http://downloads.sourceforge.net/project/lportal/Liferay%20Por
  && unzip liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip -d /opt \
  && rm liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip
 RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay
-RUN ln -s /opt/liferay/tomcat-7.0.62 /opt/liferay/tomcat
 
  #adduser
  RUN useradd -ms /bin/bash liferay
@@ -30,13 +29,13 @@ RUN ln -s /opt/liferay/tomcat-7.0.62 /opt/liferay/tomcat
 
  # Settings
  COPY ./conf/portal-ext.properties $LIFERAY_HOME/portal-ext.properties
- COPY ./conf/system-ext.properties $LIFERAY_HOME/tomcat/webapps/ROOT/WEB.INF/classes/system-ext.properties
+ COPY ./conf/system-ext.properties $LIFERAY_HOME/tomcat-7.0.62/webapps/ROOT/WEB.INF/classes/system-ext.properties
  COPY ./conf/portal-setup-wizard.properties $LIFERAY_HOME/portal-setup-wizard.properties
- RUN rm $LIFERAY_HOME/tomcat/conf/context.xml
- COPY ./conf/context.xml $LIFERAY_HOME/tomcat/conf/context.xml
+ RUN rm $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
+ COPY ./conf/context.xml $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
 
 
-RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat/bin/setenv.sh
+RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat-7.0.62/bin/setenv.sh
 
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/init.sh /opt/liferay/init.sh
@@ -54,8 +53,8 @@ RUN chmod -R g+rw $LIFERAY_HOME
 # Start Liferay
 #USER liferay
 USER root
-WORKDIR $LIFERAY_HOME/tomcat/bin
-ENTRYPOINT ["/opt/liferay/tomcat/bin/catalina.sh"]
+WORKDIR $LIFERAY_HOME/tomcat-7.0.62/bin
+ENTRYPOINT ["/opt/liferay/tomcat-7.0.62/bin/catalina.sh"]
 CMD ["run"]
 
 CMD /usr/bin/supervisord -n
