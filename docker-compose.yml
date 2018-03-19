@@ -1,0 +1,22 @@
+liferay62:
+  ports:
+  - 8080:8080/tcp
+  environment:
+    SETUP_WIZARD_ENABLED: true
+    DB_KIND: mysql
+    DB_HOST: liferaydb
+    DB_USERNAME: liferay
+    DB_PASSWORD: secret
+  image: rtgportale/liferay
+  links:
+  - mysql:liferaydb
+mysql:
+  environment:
+    MYSQL_ROOT_PASSWORD: secret
+    MYSQL_DATABASE: lportal
+    MYSQL_USER: liferay
+    MYSQL_PASSWORD: secret
+  command:
+  - --character-set-server=utf8
+  - --collation-server=utf8_general_ci
+  image: mysql:5.6.30
