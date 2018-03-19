@@ -19,7 +19,8 @@ WORKDIR /opt
 RUN curl -O -k -L http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.2.5%20GA6/liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip \
  && unzip liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip -d /opt \
  && rm liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip
-RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay
+RUN ln -s /opt/liferay-portal-6.2-ce-ga6 /opt/liferay
+RUN ln -s /opt/liferay/tomcat-7.0.62 /opt/liferay/tomcat
 
  #adduser
  RUN useradd -ms /bin/bash liferay
@@ -34,7 +35,7 @@ RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay
  COPY conf/context.xml $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
 
 
-# RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat-7.0.62/bin/setenv.sh
+ RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat-7.0.62/bin/setenv.sh
 
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/init.sh /opt/liferay/init.sh
