@@ -34,7 +34,7 @@ RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay
  COPY conf/context.xml $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
 
 
-RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat-7.0.62/bin/setenv.sh
+# RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat-7.0.62/bin/setenv.sh
 
 COPY conf/supervisord.conf /etc/supervisord.conf
 COPY conf/init.sh /opt/liferay/init.sh
