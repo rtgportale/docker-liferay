@@ -31,8 +31,7 @@ RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay
  COPY conf/portal-ext.properties $LIFERAY_HOME/portal-ext.properties
  COPY conf/system-ext.properties $LIFERAY_HOME/tomcat-7.0.62/webapps/ROOT/WEB.INF/classes/system-ext.properties
  COPY conf/portal-setup-wizard.properties $LIFERAY_HOME/portal-setup-wizard.properties
- RUN rm $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
- COPY ./conf/context.xml $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
+ COPY conf/context.xml $LIFERAY_HOME/tomcat-7.0.62/conf/context.xml
 
 
 RUN echo -e '\nCATALINA_OPTS="$CATALINA_OPTS -Djava.security.egd=file:/dev/./urandom"' >> /opt/liferay/tomcat-7.0.62/bin/setenv.sh
