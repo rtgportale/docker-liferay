@@ -19,8 +19,8 @@ WORKDIR /opt
 RUN curl -O -k -L http://downloads.sourceforge.net/project/lportal/Liferay%20Portal/6.2.5%20GA6/liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip \
  && unzip liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip -d /opt \
  && rm liferay-portal-tomcat-6.2-ce-ga6-20160112152609836.zip
-RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay \
- && ln -s /opt/liferay/tomcat-7.0.62 /opt/liferay/tomcat
+RUN ln -s /opt/liferay-portal-tomcat-6.2-ce-ga6 /opt/liferay
+RUN ln -s /opt/liferay/tomcat-7.0.62 /opt/liferay/tomcat
 
  #adduser
  RUN useradd -ms /bin/bash liferay
